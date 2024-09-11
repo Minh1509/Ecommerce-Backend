@@ -21,7 +21,7 @@ app.get('/', (req, res, next) => {
     const strCompress = 'Hello Minh';
     return res.status(200).json({
         message: "Hello",
-        metaData : strCompress.repeat(10000)
+        // metaData : strCompress.repeat(10000)
     })
 })
 
