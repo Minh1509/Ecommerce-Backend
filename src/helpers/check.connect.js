@@ -16,8 +16,8 @@ const checkOverLoad = () => {
     const numCores = os.cpus().length;
     const memoryUsage = process.memoryUsage().rss;
 
-    console.log(`Active cores: ${num}`);
-    console.log(`Memory usage ${memoryUsage / 1024/ 1024} MB`);
+    // console.log(`Active cores: ${num}`);
+    // console.log(`Memory usage ${memoryUsage / 1024/ 1024} MB`);
     const maxConnection = numCores * 5;
     if (num > maxConnection) {
       console.log("server is overload detected");
