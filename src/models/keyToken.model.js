@@ -18,6 +18,10 @@ var KeyTokenSchema = new Schema(
       type: String,
       required: true,
     },
+    privateKey: {
+      type: String,
+      required: true,
+    },
     refreshToken: {
       // sử dụng để biết các hacker sử dụng trái phép token này
       type: Array,
