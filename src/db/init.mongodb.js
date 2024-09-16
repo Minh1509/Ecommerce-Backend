@@ -1,9 +1,8 @@
 'use strict';
-
+require('dotenv').config();
 const mongoose = require("mongoose");
 const {countConnect} = require("../helpers/check.connect");
-const stringConnect =
-  "mongodb+srv://minh1509:minh1509@cluster0.qqwua.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const stringConnect =process.env.DB_URI;
 
 class Database {
   constructor() {

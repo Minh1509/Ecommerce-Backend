@@ -10,19 +10,16 @@ const {checkOverLoad} = require("./helpers/check.connect");
 // init middleware
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(compression);
+// app.use(compression);
+app.use(express.json());
+app.use(express.urlencoded({extend: true}));
+
 
 // init db
 require("./db/init.mongodb");
 checkOverLoad();
 
 // init routes
-app.get('/', (req, res, next) => {
-    const strCompress = 'Hello Minh';
-    return res.status(200).json({
-        message: "Hello",
-        // metaData : strCompress.repeat(10000)
-    })
-})
+app.use(require("./routes/index"));
 
 module.exports = app;
