@@ -4,12 +4,13 @@ const keyTokenModel = require("../models/keyToken.model");
 
 // Tao token
 class keyTokenService {
-    static createKeyToken = async ({userId, publicKey}) => {
+    static createKeyToken = async ({userId, publicKey, privateKey}) => {
         try {
-            const publicKeyString = publicKey.toString();
+          
             const tokens = await keyTokenModel.create({
                 user: userId,
-                publicKey : publicKey
+                publicKey : publicKey,
+                privateKey: privateKey
             })
             return tokens? tokens.publicKey: null;
         } catch (error) {
