@@ -1,13 +1,18 @@
 "use strict";
 
+const { CREATE } = require("../core/success.response");
 const assetService = require("../services/asset.service");
 
 class assetController {
   signUp = async (req, res, next) => {
     console.log("Signup::", req.body);
-    // 200 ok
-    // 201 create
-    return res.status(201).json(await assetService.signUp(req.body));
+    new CREATE({
+      message: "Registered OK !!",
+      metadata: await assetService.signUp(req.body),
+      option: {
+        limit: 10,
+      },
+    }).send(res);
   };
 }
 
