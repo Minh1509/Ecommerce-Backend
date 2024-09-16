@@ -21,7 +21,7 @@ class assetService {
       if (holderShop) {
         return {
           code: "xxxx",
-          message: "Email is conflict",
+          message: "Email is registered",
         };
       }
 
