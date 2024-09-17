@@ -11,3 +11,15 @@ x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564
   "password": "securepassword"
 }
 
+
+###
+POST {{url_dev}}/shop/login
+Content-Type: application/json
+x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
+
+{
+  "email": "minh11@gmail.com",
+  "password": "securepassword"
+}
+
+
