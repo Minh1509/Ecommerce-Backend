@@ -22,11 +22,15 @@ var KeyTokenSchema = new Schema(
       type: String,
       required: true,
     },
-    refreshToken: {
+    refreshTokensUsed: {
       // sử dụng để biết các hacker sử dụng trái phép token này
       type: Array,
       default: [],
     },
+    refreshToken : {
+      type: String,
+      require: true
+    }
   },
   {
     timestamps: true,

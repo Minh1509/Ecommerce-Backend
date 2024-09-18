@@ -6,7 +6,12 @@ const crypto = require("crypto");
 const keyTokenService = require("./keyToken.service");
 const createTokenPair = require("../auth/authUtils");
 const { getInfoData } = require("../utils");
-const { ConflictErrorResponse } = require("../core/error.response");
+const {
+  ConflictErrorResponse,
+  BadRequestErrorResponse,
+  AuthFailureError,
+} = require("../core/error.response");
+const findByEmail = require("./shop.service");
 
 const roleShop = {
   shop: "Shop",
@@ -15,6 +20,48 @@ const roleShop = {
   admin: "Admin",
 };
 class assetService {
+  /*
+  1 . check email trong db
+  2. match password
+  3. create accessToken, refreshToken and save
+  4 . generate tokens
+  5. getData return login
+  */
+  static Login = async ({ email, password, refreshToken = null }) => {
+    const foundShop = await findByEmail({ email });
+    if (!foundShop) throw new BadRequestErrorResponse("Uer is not registered");
+
+    // 2.
+    const match = bcrypt.compare(password, foundShop.password);
+    if (!match) throw new AuthFailureError("Mật khẩu không khớp");
+
+    // 3.
+    const publicKey = crypto.randomBytes(64).toString("hex");
+    const privateKey = crypto.randomBytes(64).toString("hex");
+
+    // 4.
+    const tokens = await createTokenPair(
+      { user: foundShop._id, email },
+      publicKey,
+      privateKey
+    );
+
+    await keyTokenService.createKeyToken({
+      refreshToken: tokens.refreshToken,
+      privateKey,
+      publicKey,
+      userId: foundShop._id,
+    });
+    return {
+      metadata: {
+        shop: getInfoData({
+          field: ["_id", "name", "email"],
+          object: foundShop,
+        }),
+        tokens,
+      },
+    };
+  };
   static signUp = async ({ name, email, password }) => {
     // step1 : Check email
     const holderShop = await shopModel.findOne({ email }).lean();

@@ -32,4 +32,4 @@ class CREATE extends SuccessResponse {
     }
 }
 
-module.exports = {OK, CREATE}
+module.exports = {OK, CREATE, SuccessResponse}
