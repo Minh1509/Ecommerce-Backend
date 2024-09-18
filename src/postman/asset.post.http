@@ -24,6 +24,14 @@ x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564
 
 
 ###
+POST {{url_dev}}/shop/handlerRefreshToken
+x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
+x-client-id: 66ea50bffe72b0aa13c30f8a
+x-rtoken-key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhNTBiZmZlNzJiMGFhMTNjMzBmOGEiLCJlbWFpbCI6Im1pbmgxM0BnbWFpbC5jb20iLCJpYXQiOjE3MjY2NzI1MTMsImV4cCI6MTcyNzI3NzMxM30.TVZRHIU6in-ImXmmCG3VELg3xYGWatDHw9arLDK6_Kc
+
+
+
+###
 POST {{url_dev}}/shop/logout
 x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
 x-client-id: 66ea337f0fdcb83b4994cc7b

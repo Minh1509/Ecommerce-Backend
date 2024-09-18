@@ -20,12 +20,50 @@ const roleShop = {
   admin: "Admin",
 };
 class assetService {
+  static handlerRefreshToken = async ({ refreshToken, user, keyStore }) => {
+    const { userId, email } = user;
+
+    // Kiểm tra xem refreshToken đã được sử dụng chưa
+    if (keyStore.refreshTokensUsed.includes(refreshToken)) {
+      await keyTokenService.deleteKeyById(userId); // Giả sử deleteById là phương thức đúng
+      throw new BadRequestErrorResponse("Refresh token has already been used.");
+    }
+
+    // Kiểm tra refreshToken hợp lệ
+    if (keyStore.refreshToken !== refreshToken)
+      throw new AuthFailureError("Invalid refresh token.");
+
+    // Tìm shop bằng email
+    const foundShop = await findByEmail({ email });
+    if (!foundShop) throw new AuthFailureError("Shop not registered.");
+
+    // Tạo cặp token mới
+    const tokens = await createTokenPair(
+      { userId, email },
+      keyStore.publicKey,
+      keyStore.privateKey
+    );
+
+    // Cập nhật keyStore với refreshToken mới và thêm refreshToken đã sử dụng
+    await keyTokenService.updateKeyStore(keyStore._id, {
+      refreshToken: tokens.refreshToken,
+      refreshTokensUsed: refreshToken,
+    });
+
+    return {
+      user,
+      tokens,
+    };
+  };
+
+
   static logout = async (keyStore) => {
     const delKey = await keyTokenService.removeKeyById(keyStore._id);
     console.log(delKey);
     return delKey;
   };
-  /*
+
+  /*Login
   1 . check email trong db
   2. match password
   3. create accessToken, refreshToken and save

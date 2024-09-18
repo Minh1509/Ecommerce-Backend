@@ -33,10 +33,31 @@ class keyTokenService {
   };
 
   static findByUserId = async (userId) => {
-    return await keyTokenModel.findOne({ user: new mongoose.Types.ObjectId(userId) }).lean(); // Ensure userId is converted to ObjectId
+    return await keyTokenModel
+      .findOne({ user: new mongoose.Types.ObjectId(userId) })
+      .lean(); 
   };
   static removeKeyById = async (id) => {
     return await keyTokenModel.deleteOne(id);
+  };
+  static deleteKeyById = async (id) => {
+    return await keyTokenModel.deleteOne({
+      user: new mongoose.Types.ObjectId(id),
+    });
+  };
+  static updateKeyStore = async (id, updateData) => {
+    return await keyTokenModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          refreshToken: updateData.refreshToken,
+        },
+        $addToSet: {
+          refreshTokensUsed: updateData.refreshTokensUsed,
+        },
+      },
+      { new: true }
+    );
   };
 }
 

@@ -4,6 +4,15 @@ const { CREATE, SuccessResponse } = require("../core/success.response");
 const assetService = require("../services/asset.service");
 
 class assetController {
+  handlerRefreshToken = async(req, res, next) => {
+    new SuccessResponse ({
+        message : "Get token success !",
+        metadata: await assetService.handlerRefreshToken({refreshToken: req.refreshToken , 
+          keyStore: req.keyStore,
+          user: req.user
+        })
+      }).send(res);
+  }
   logout = async(req, res, next) => {
     new SuccessResponse({
       message: "Logout success",
