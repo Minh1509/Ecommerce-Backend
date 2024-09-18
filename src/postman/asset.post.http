@@ -7,7 +7,7 @@ x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564
 
 {
   "name": "minh",
-  "email": "minh11@gmail.com",
+  "email": "minh13@gmail.com",
   "password": "securepassword"
 }
 
@@ -18,8 +18,16 @@ Content-Type: application/json
 x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
 
 {
-  "email": "minh11@gmail.com",
+  "email": "minh13@gmail.com",
   "password": "securepassword"
 }
+
+
+###
+POST {{url_dev}}/shop/logout
+x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
+x-client-id: 66ea337f0fdcb83b4994cc7b
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhMzM3ZjBmZGNiODNiNDk5NGNjN2IiLCJlbWFpbCI6Im1pbmgxMkBnbWFpbC5jb20iLCJpYXQiOjE3MjY2MzE4OTcsImV4cCI6MTcyNjgwNDY5N30.HYwxD8AbfVjfsrRJO6HUDia1QkpOyPFFh-AdZE9Klzg
+x-rtoken-key:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhMzM3ZjBmZGNiODNiNDk5NGNjN2IiLCJlbWFpbCI6Im1pbmgxMkBnbWFpbC5jb20iLCJpYXQiOjE3MjY2MzE4OTcsImV4cCI6MTcyNzIzNjY5N30.N70wZm58psyDZnYMqjd3ollGOeH9O1FYGUtiL9kOhSQ
 
 
