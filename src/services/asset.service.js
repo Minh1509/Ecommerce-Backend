@@ -4,7 +4,7 @@ const shopModel = require("../models/shop.model");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const keyTokenService = require("./keyToken.service");
-const createTokenPair = require("../auth/authUtils");
+const { createTokenPair } = require("../auth/authUtils");
 const { getInfoData } = require("../utils");
 const {
   ConflictErrorResponse,
@@ -20,6 +20,11 @@ const roleShop = {
   admin: "Admin",
 };
 class assetService {
+  static logout = async (keyStore) => {
+    const delKey = await keyTokenService.removeKeyById(keyStore._id);
+    console.log(delKey);
+    return delKey;
+  };
   /*
   1 . check email trong db
   2. match password
@@ -27,7 +32,7 @@ class assetService {
   4 . generate tokens
   5. getData return login
   */
-  static Login = async ({ email, password, refreshToken = null }) => {
+  static login = async ({ email, password, refreshToken = null }) => {
     const foundShop = await findByEmail({ email });
     if (!foundShop) throw new BadRequestErrorResponse("Uer is not registered");
 
@@ -41,7 +46,7 @@ class assetService {
 
     // 4.
     const tokens = await createTokenPair(
-      { user: foundShop._id, email },
+      { userId: foundShop._id, email },
       publicKey,
       privateKey
     );
@@ -116,10 +121,6 @@ class assetService {
         },
       };
     }
-    return {
-      code: 200,
-      metadata: null,
-    };
   };
 }
 

@@ -4,9 +4,15 @@ const { CREATE, SuccessResponse } = require("../core/success.response");
 const assetService = require("../services/asset.service");
 
 class assetController {
+  logout = async(req, res, next) => {
+    new SuccessResponse({
+      message: "Logout success",
+      metadata: await assetService.logout(req.keyStore)
+    }).send(res);
+  }
   login = async(req, res, next) => {
     new SuccessResponse({
-      metadata: await assetService.Login(req.body)
+      metadata: await assetService.login(req.body)
     }).send(res);
   }
   signUp = async (req, res, next) => {

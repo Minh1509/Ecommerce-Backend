@@ -1,9 +1,14 @@
 const express = require('express');
 const assetController = require('../../controllers/asset.controller');
-const {asyncHandler} = require("../../auth/checkAuth")
+const {asyncHandler} = require("../../helpers/asyncHandler")
 const router = express.Router();
+const {authentication} = require("../../auth/authUtils")
 
 router.post('/shop/signup', asyncHandler(assetController.signUp));
 router.post('/shop/login', asyncHandler(assetController.login));
+
+// authentication for logout
+router.use(authentication)
+router.post('/shop/logout', asyncHandler(assetController.logout));
 
 module.exports = router;

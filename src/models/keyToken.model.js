@@ -2,7 +2,7 @@
 
 // Luu lai idUser, publicKey, refreshToken
 
-const { Schema, model } = require("mongoose"); // Erase if already required
+const { Schema, model , Types} = require("mongoose"); // Erase if already required
 
 const document_name = "key";
 const collection_name = "keys";
