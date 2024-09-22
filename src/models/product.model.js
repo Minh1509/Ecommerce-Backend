@@ -1,24 +1,27 @@
 "use strict";
 
-const { Schema, model } = require("mongoose"); // Erase if already required
+const { Schema, model } = require("mongoose");
 
 const document_name = "product";
 const collection_name = "products";
+
 // Declare the Schema of the Mongo model
-const productModel = new Schema(
+const productSchema = new Schema(
   {
-    product_name: { type: String, require: true },
-    product_thumb: { type: String, require: true },
-    product_description: true,
-    product_price: { type: Number, require: true },
-    product_quantity: { type: Number, require: true },
+    product_name: { type: String, required: true },
+    product_thumb: { type: String, required: true },
+    product_description: { type: String, required: true },
+    product_price: { type: Number, required: true },
+    product_quantity: { type: Number, required: true },
     product_type: {
       type: String,
-      require: true,
-      enum: ["Electronic", "Clothing", "Furniture"],
+      required: true,
+      enum: ["electronics", "clothings", "furnitures"],
     },
     product_shop: { type: Schema.Types.ObjectId, ref: "shop" },
-    product_attribute: { type: Schema.Types.Mixed, require: true },
+    product_attribute: {
+      type: Schema.Types.Mixed,
+    },
   },
   {
     timestamps: true,
@@ -26,22 +29,25 @@ const productModel = new Schema(
   }
 );
 
-const clothingModel = new Schema(
+const clothingSchema = new Schema(
   {
-    brand: { type: String, require: true },
-    size: String,
-    material: String,
+    brand: { type: String, required: true },
+    size: { type: String },
+    material: { type: String },
+    product_shop: { type: Schema.Types.ObjectId, ref: "shop" },
   },
   {
     timestamps: true,
-    collection: "products",
+    collection: "clothings",
   }
 );
-const electronicModel = new Schema(
+
+const electronicSchema = new Schema(
   {
-    manufactor: { type: String, require: true },
-    model: String,
-    color: String,
+    manufacturer: { type: String, required: true },
+    model: { type: String },
+    color: { type: String },
+    product_shop: { type: Schema.Types.ObjectId, ref: "shop" },
   },
   {
     timestamps: true,
@@ -49,9 +55,10 @@ const electronicModel = new Schema(
   }
 );
 
-//Export the model
+// Export the model
 module.exports = {
-  product: model(document_name, productModel),
-  clothing: model("clothings", clothingModel),
-  electronic: model("electronics", electronicModel),
+  product: model(document_name, productSchema),
+  clothing: model("clothing", clothingSchema),
+  electronic: model("electronic", electronicSchema),
+ 
 };
