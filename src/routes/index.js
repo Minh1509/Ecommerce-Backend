@@ -8,7 +8,7 @@ router.use(apiKey);
 router.use(checkPermission("0000"));
 
 
-router.use("/v1/api", require("./assets"));
 router.use("/v1/api", require("./product"));
+router.use("/v1/api", require("./assets"));
 
 module.exports = router;

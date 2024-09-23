@@ -2,6 +2,13 @@
 
 const { BadRequestErrorResponse } = require("../core/error.response");
 const { clothing, electronic, product } = require("../models/product.model");
+const {
+  findAllDraftsForShop,
+  publishProductByShop,
+  findAllPublishForShop,
+  unPublishProductByShop,
+  searchProductByUser
+} = require("../models/repositorities/product.repo");
 
 class ProductFactory {
   static async createProduct(type, payload) {
@@ -14,6 +21,30 @@ class ProductFactory {
         throw new BadRequestErrorResponse("Invalid Error Type");
     }
   }
+  // Put
+  static async publishProductByShop({ product_id , product_shop}) {
+    return await publishProductByShop({product_id, product_shop});
+  }
+  static async unPublishProductByShop({ product_id , product_shop}) {
+    return await unPublishProductByShop({product_id, product_shop});
+  }
+  // End put
+
+
+  //Query
+  static async findAllDraftsForShop({ product_shop, limit = 50, skip = 0 }) {
+    const query = { product_shop, isDraft: true };
+    return await findAllDraftsForShop(query, limit, skip);
+  }
+  static async findAllPublishForShop({ product_shop, limit = 50, skip = 0 }) {
+    const query = { product_shop, isPublished: true };
+    return await findAllPublishForShop(query, limit, skip);
+  }
+
+  static async searchProductByUser (keySearch) {
+    return await searchProductByUser({keySearch});
+  }
+  // End query
 }
 
 class Product {
