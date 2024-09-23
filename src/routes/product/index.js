@@ -7,6 +7,8 @@ const productController = require('../../controllers/product.controller');
 
 // Search by user
 router.get('/search/:keySearch', asyncHandler(productController.getSearchProductByUser));
+router.get('/product/all', asyncHandler(productController.getFindAllProduct));
+router.get('/product/:id', asyncHandler(productController.getFindProducts));
 
 router.use(authentication)
 router.post('/product', asyncHandler(productController.createProduct));
