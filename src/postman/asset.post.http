@@ -6,8 +6,8 @@ Content-Type: application/json
 x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
 
 {
-  "name": "minh",
-  "email": "minh13@gmail.com",
+  "name": "minh1",
+  "email": "minh01@gmail.com",
   "password": "securepassword"
 }
 
@@ -35,7 +35,7 @@ x-rtoken-key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhNTBiZmZlN
 POST {{url_dev}}/shop/logout
 x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
 x-client-id: 66ea50bffe72b0aa13c30f8a
-x-rtoken-key:
+x-rtoken-key:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhNTBiZmZlNzJiMGFhMTNjMzBmOGEiLCJlbWFpbCI6Im1pbmgxM0BnbWFpbC5jb20iLCJpYXQiOjE3MjcwMDIxMzksImV4cCI6MTcyNzYwNjkzOX0.ibgWX5JOxIDSalnWr8Ccn9GUBjSBXLU3VarPMzQBJPQ
 authorization: 
 
 
@@ -44,7 +44,7 @@ POST {{url_dev}}/product
 Content-Type: application/json
 x-api-key: 492e8858664566a0e7b02f2a88b90dfd7dc792e449ede17ece4fad61d64cd7a8cf564b59dea95c68a46a4efe29c7474c80af01c997f4f133834c3e331d63e2b8
 x-client-id: 66ea50bffe72b0aa13c30f8a
-authorization : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhNTBiZmZlNzJiMGFhMTNjMzBmOGEiLCJlbWFpbCI6Im1pbmgxM0BnbWFpbC5jb20iLCJpYXQiOjE3MjcwMDIxMzksImV4cCI6MTcyNzE3NDkzOX0.COhOxjXGpAstH91ITnncbfBD3WnllM5vF4r48d63Hqo
+x-rtoken-key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmVhNTBiZmZlNzJiMGFhMTNjMzBmOGEiLCJlbWFpbCI6Im1pbmgxM0BnbWFpbC5jb20iLCJpYXQiOjE3MjcwMDIxMzksImV4cCI6MTcyNzYwNjkzOX0.ibgWX5JOxIDSalnWr8Ccn9GUBjSBXLU3VarPMzQBJPQ
 
 {
   "product_name": "TShirt",
