@@ -43,11 +43,19 @@ const findAllProducts = async ({ limit, sort, page, filter, select }) => {
   return products;
 };
 
-const findProducts = async({product_id, filter, unSelect}) => {
-  const query = {_id: product_id, ...filter}
-  return await product.findOne(query).select(unGetSelectData(unSelect))
-}
+const findProducts = async ({ product_id, filter, unSelect }) => {
+  const query = { _id: product_id, ...filter };
+  return await product.findOne(query).select(unGetSelectData(unSelect));
+};
 
+const updateProductById = async ({
+  productId,
+  bodyUpdate,
+  model,
+  isNew = true,
+}) => {
+  return await model.findByIdAndUpdate(productId, bodyUpdate, { new: isNew });
+};
 
 const publishProductByShop = async ({ product_id, product_shop }) => {
   const foundShop = await product.findOne({
@@ -102,5 +110,6 @@ module.exports = {
   unPublishProductByShop,
   searchProductByUser,
   findAllProducts,
-  findProducts
+  findProducts,
+  updateProductById,
 };
