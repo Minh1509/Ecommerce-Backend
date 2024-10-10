@@ -13,6 +13,50 @@ class productController {
       }),
     }).send(res);
   };
+
+  publishProductByShop = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Publish product from drafts success",
+      metadata: await ProductFactory.publishProductByShop({
+        product_id: req.params.id,
+        product_shop: req.user.userId,
+      }),
+    }).send(res);
+  };
+  unPublishProductByShop = async (req, res, next) => {
+    new SuccessResponse({
+      message: "UnPublish product success",
+      metadata: await ProductFactory.unPublishProductByShop({
+        product_id: req.params.id,
+        product_shop: req.user.userId,
+      }),
+    }).send(res);
+  };
+  // Query
+  getAllDraftsForShop = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Get all drafts success",
+      metadata: await ProductFactory.findAllDraftsForShop({
+        product_shop: req.user.userId,
+      }),
+    }).send(res);
+  };
+  getAllPublishForShop = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Get all publish success",
+      metadata: await ProductFactory.findAllPublishForShop({
+        product_shop: req.user.userId,
+      }),
+    }).send(res);
+  };
+  getSearchProductByUser = async (req, res, next) => {
+    new SuccessResponse({
+      message: "Get search product  success",
+      metadata: await ProductFactory.searchProductByUser(req.params.keySearch),
+    }).send(res);
+  };
+
+  // End Query
 }
 
 module.exports = new productController();
