@@ -7,6 +7,7 @@ const {
   electronic,
   furniture,
 } = require("../../models/product.model");
+const { getSelectData, unGetSelectData } = require("../../utils");
 
 const findAllDraftsForShop = async (query, limit, skip) => {
   return await queryProduct(query, limit, skip);
@@ -15,10 +16,11 @@ const findAllPublishForShop = async (query, limit, skip) => {
   return await queryProduct(query, limit, skip);
 };
 const searchProductByUser = async ({ keySearch }) => {
-  const regexSearch = new RegExp(keySearch, 'i');
+  const regexSearch = new RegExp(keySearch, "i");
   const result = await product
     .find(
       {
+        isPublished: true,
         $text: { $search: regexSearch },
       },
       { score: { $meta: "textScore" } }
@@ -27,6 +29,25 @@ const searchProductByUser = async ({ keySearch }) => {
     .lean();
   return result;
 };
+
+const findAllProducts = async ({ limit, sort, page, filter, select }) => {
+  const skip = (page - 1) * limit;
+  const sortBy = sort === "ctime" ? { id: -1 } : { id: 1 };
+  const products = await product
+    .find(filter)
+    .sort(sortBy)
+    .skip(skip)
+    .limit(limit)
+    .select(getSelectData(select))
+    .lean();
+  return products;
+};
+
+const findProducts = async({product_id, filter, unSelect}) => {
+  const query = {_id: product_id, ...filter}
+  return await product.findOne(query).select(unGetSelectData(unSelect))
+}
+
 
 const publishProductByShop = async ({ product_id, product_shop }) => {
   const foundShop = await product.findOne({
@@ -79,5 +100,7 @@ module.exports = {
   publishProductByShop,
   findAllPublishForShop,
   unPublishProductByShop,
-  searchProductByUser
+  searchProductByUser,
+  findAllProducts,
+  findProducts
 };
