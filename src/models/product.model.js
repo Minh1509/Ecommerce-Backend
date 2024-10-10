@@ -80,7 +80,7 @@ const furnitureSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "electronics",
+    collection: "furnitures",
   }
 );
 
@@ -89,5 +89,5 @@ module.exports = {
   product: model(document_name, productSchema),
   clothing: model("clothing", clothingSchema),
   electronic: model("electronic", electronicSchema),
-  furniture: model("furnitures", furnitureSchema),
+  furniture: model("furniture", furnitureSchema),
 };
