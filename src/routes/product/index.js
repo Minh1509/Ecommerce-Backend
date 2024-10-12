@@ -7,12 +7,12 @@ const productController = require('../../controllers/product.controller');
 
 // Search by user
 router.get('/search/:keySearch', asyncHandler(productController.getSearchProductByUser));
-router.get('/product/all', asyncHandler(productController.getFindAllProduct));
-router.get('/product/:id', asyncHandler(productController.getFindProducts));
+router.get('/all', asyncHandler(productController.getFindAllProduct));
+router.get('/:id', asyncHandler(productController.getFindProducts));
 
 router.use(authentication)
-router.post('/product', asyncHandler(productController.createProduct));
-router.patch('/product/:productId', asyncHandler(productController.updateProduct));
+router.post('/', asyncHandler(productController.createProduct));
+router.patch('/:productId', asyncHandler(productController.updateProduct));
 router.post('/publish/:id', asyncHandler(productController.publishProductByShop));
 router.post('/unpublish/:id', asyncHandler(productController.unPublishProductByShop));
 
