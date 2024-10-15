@@ -135,14 +135,14 @@ class CommentService {
 
     // xoa tát cả comment trong cả cụm
     await commentModel.deleteMany({
-      comment_productId: convertToObjectIdMongodb(commentId),
+      comment_productId: convertToObjectIdMongodb(productId),
       comment_left: { $gte: leftValue, $lte: rightValue },
     });
 
     // 4. caaph nhat left , right con lai
     await commentModel.updateMany(
       {
-        comment_productId: convertToObjectIdMongodb(commentId),
+        comment_productId: convertToObjectIdMongodb(productId),
         comment_right: { $gt: rightValue },
       },
       {
@@ -153,7 +153,7 @@ class CommentService {
     );
     await commentModel.updateMany(
       {
-        comment_productId: convertToObjectIdMongodb(commentId),
+        comment_productId: convertToObjectIdMongodb(productId),
         comment_left: { $gt: rightValue },
       },
       {
