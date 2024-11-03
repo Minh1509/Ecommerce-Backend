@@ -19,6 +19,7 @@ const {
   updateProductById,
 } = require("../models/repositorities/product.repo");
 const { removeUndefinedObject, updateNestedObjectParser } = require("../utils");
+const { pushNotiToSystem } = require("./notification.service");
 
 class ProductFactory {
   static async createProduct(type, payload) {
@@ -86,7 +87,12 @@ class ProductFactory {
       sort,
       page,
       filter,
-      select: ["product_name", "product_price", "product_thumb", 'product_shop'],
+      select: [
+        "product_name",
+        "product_price",
+        "product_thumb",
+        "product_shop",
+      ],
     });
   }
   // End query
@@ -125,6 +131,19 @@ class Product {
         shopId: this.product_shop,
         stock: this.product_quantity,
       });
+
+      // push noti system collection
+      pushNotiToSystem({
+        type: "PROMOTION-001",
+        receivedId: 1,
+        senderId: this.product_shop,
+        options: {
+          product_name: this.product_name,
+          shop_name: this.product_shop,
+        },
+      })
+        .then((re) => console.log(re))
+        .catch((err) => console.error(err));
     }
 
     return newProduct;
