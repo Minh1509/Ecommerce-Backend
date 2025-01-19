@@ -13,6 +13,10 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extend: true }));
 
+app.get("/", (req, res) => {
+  res.send("Hello");
+})
+
 // test pub sub redis
 // require('./tests/inventory.test');
 // const productTest = require('./tests/product.test');
@@ -25,9 +29,7 @@ checkOverLoad();
 // init routes
 app.use(require("./routes/index"));
 
-app.get("/", (req, res) => {
-  res.send("Hello");
-})
+
 
 // handing errors
 app.use((req, res, next) => {
