@@ -26,8 +26,9 @@ checkOverLoad();
 app.use(require("./routes/index"));
 
 app.get("/", (req, res) => {
-  res.send(Hello);
+  res.send("Hello");
 })
+
 // handing errors
 app.use((req, res, next) => {
   const error = new Error("Not Found");
